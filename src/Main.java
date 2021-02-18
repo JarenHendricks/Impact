@@ -10,14 +10,13 @@
  *
  * 19 February 2021
  */
-
 import java.util.Collection;
 
 public class Main {
 
     public static void main(String[] args) {
         RangeSummarizer rangeSum = new RangeSummarizer();
-        Collection<Integer> array = rangeSum.collect("0, 3");
+        Collection<Integer> array = rangeSum.collect("1,3");
         System.out.println(rangeSum.summarizeCollection(array));
     }
 }

@@ -24,19 +24,32 @@ import static java.util.stream.Collectors.toList;
 public class RangeSummarizer implements NumberRangeSummarizer{
 
 
+    //Attributes
     private StringBuilder sb;
     private AtomicInteger start;
 
+    /**
+     * Constructor creates a StringBuilder and AtomicInteger object
+     */
     public RangeSummarizer(){
         this.sb = new StringBuilder();
         this.start = new AtomicInteger(0);
     }
 
-    //collect the input
+    /**
+     * Method collects the input
+     *
+     * @param input accepts strings
+     * @return
+     */
     public Collection<Integer> collect(String input){
         if(input.equals(""))
             return Arrays.asList();
-        return Arrays.asList(input.replaceAll("\\s", "").split(",")).stream().map(Integer::parseInt).collect(toList());
+        return Arrays.asList(input.replaceAll("\\s", "")
+                .split(","))
+                .stream()
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 
     //get the summarized string
