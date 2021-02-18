@@ -1,3 +1,13 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toList;
+
 /**
  * Jaren Hendricks
  * Impact Solution
@@ -10,17 +20,6 @@
  *
  * 19 February 2021
  */
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Collectors.toList;
-
 public class RangeSummarizer implements NumberRangeSummarizer{
 
 
@@ -40,11 +39,14 @@ public class RangeSummarizer implements NumberRangeSummarizer{
      * Method collects the input
      *
      * @param input accepts strings
-     * @return
+     * @return Collection of Integer values
      */
     public Collection<Integer> collect(String input){
+        //returns empty list if an empty string is found
         if(input.equals(""))
             return Arrays.asList();
+
+        //Splits the string by commas, maps values to type Integer and collects resultant data in Collection<Integer>.
         return Arrays.asList(input.replaceAll("\\s", "")
                 .split(","))
                 .stream()
@@ -52,13 +54,22 @@ public class RangeSummarizer implements NumberRangeSummarizer{
                 .collect(toList());
     }
 
-    //get the summarized string
+    /**
+     * Method gets the resultant summarized string
+     *
+     * @param input Collection<Integer>
+     * @return summarized string or "Empty List" if the input is empty
+     */
     public String summarizeCollection(Collection<Integer> input){
+        //Converts Collection to List
         List<Integer> seq = input.stream().collect(toCollection((ArrayList::new)));
 
+        //Checks if list is empty
         if (input.isEmpty())
             return "Empty List";
 
+        /*Creates a stream, retrieves indexes of starting ranges via filter
+         and appends correct ranges to stringBuilder via forEach loop.*/
         IntStream.range(1, input.size())
                 .filter(i ->  seq.get(i-1) + 1 != seq.get(i))
                 .forEach(i -> {
@@ -69,6 +80,7 @@ public class RangeSummarizer implements NumberRangeSummarizer{
                     start.set(i);
                 });
 
+        //Appends final ranges to the stringBuilder Object.
         if (seq.size() - 1 == start.get())
             sb.append(String.valueOf(seq.get(start.get())));
         else
