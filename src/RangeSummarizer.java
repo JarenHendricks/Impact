@@ -1,3 +1,16 @@
+/**
+ * Jaren Hendricks
+ * Impact Solution
+ * RangeSummarizer Class
+ *
+ * Assumptions: Inputted values are sorted in ascending order
+ *              All inputted values are unique
+ *              All inputted values are non-negative numbers
+ *              Input can be an empty string
+ *
+ * 19 February 2021
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,7 +36,7 @@ public class RangeSummarizer implements NumberRangeSummarizer{
     public Collection<Integer> collect(String input){
         if(input.equals(""))
             return Arrays.asList();
-        return Arrays.asList(input.split(",")).stream().map(Integer::parseInt).collect(toList());
+        return Arrays.asList(input.replaceAll("\\s", "").split(",")).stream().map(Integer::parseInt).collect(toList());
     }
 
     //get the summarized string
