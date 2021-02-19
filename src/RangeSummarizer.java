@@ -77,10 +77,11 @@ public class RangeSummarizer implements NumberRangeSummarizer{
                         sb.append(String.valueOf(seq.get(start.get()))).append(", ");
                     else
                         sb.append(seq.get(start.get()) + "-" + seq.get(i-1)).append(", ");
+
                     start.set(i);
                 });
 
-        //Appends final ranges to the stringBuilder Object.
+        //Appends the final ranges to the stringBuilder Object.
         if (seq.size() - 1 == start.get())
             sb.append(String.valueOf(seq.get(start.get())));
         else
